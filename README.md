@@ -73,56 +73,111 @@ CLOUD & PLATFORMS
 
 🚀 FEATURED PROJECTS
 
+## 🚀 FEATURED PROJECTS
+
+<div align="center">
+
 <table>
 <tr>
-<td width="50%">
 
-🛡️ Deadlock Detector & Recovery Simulator
+<td width="50%" valign="top">
 
-Systems / Operating Systems
+<h3>🛡️ Deadlock Detector & Recovery Simulator</h3>
 
-A practical simulator focused on visualizing deadlock detection and recovery concepts.
+<p>
+An interactive systems project focused on understanding
+Operating System deadlock detection and recovery concepts
+through simulation and visualization.
+</p>
 
-Focus: algorithms • OS concepts • simulation • UI
+<p>
+<b>Focus:</b><br>
+<code>Algorithms</code> <code>Operating Systems</code>
+<code>Simulation</code> <code>UI</code>
+</p>
 
+<p>
 <a href="https://github.com/AyushTodkar404/DEADLOCK-DETECTOR-AND-RECOVERY-SIMULATOR">
-<img src="https://img.shields.io/badge/VIEW%20PROJECT-00F5FF?style=for-the-badge&logo=github&logoColor=black" alt="View project"/>
+<b>🔗 View Repository →</b>
 </a>
+</p>
 
 </td>
-<td width="50%">
 
-🧾 Civic Complaints & Maintenance Tracker
+<td width="50%" valign="top">
 
-Web Application
+<h3>🧾 FixMySpot — Civic Complaints & Maintenance Tracker</h3>
 
-A structured platform for organizing civic complaints and maintenance-related records.
+<p>
+A full-stack civic issue management platform connecting
+citizens with municipal authorities for reporting,
+tracking and resolving public issues.
+</p>
 
-Focus: web development • data handling • usability
+<p>
+<b>Focus:</b><br>
+<code>React</code> <code>MongoDB</code> <code>RBAC</code>
+<code>Dashboards</code> <code>Maps</code> <code>Analytics</code>
+</p>
 
-<a href="https://github.com/AyushTodkar404/FIXMYSOT-CIVIC-COMPLAINTS-AND-MAINTENANCE-TRACKER">
-<img src="https://img.shields.io/badge/VIEW%20PROJECT-7C3AED?style=for-the-badge&logo=github&logoColor=white" alt="View project"/>
+<p>
+<a href="https://github.com/AyushTodkar404/FIXMYSOT-CIVIC-COMPLAINTS-AND-MAINTAINENCE-TRACKER">
+<b>🔗 View Repository →</b>
 </a>
+</p>
 
 </td>
+
 </tr>
+
 <tr>
-<td width="50%">
 
-💼 Personal Portfolio Website
+<td width="50%" valign="top">
 
-Portfolio / Frontend
+<h3>💼 Personal Portfolio Website</h3>
 
-A personal developer portfolio designed to present projects, skills and progress.
+<p>
+A responsive personal developer portfolio showcasing
+projects, technical skills, education, achievements
+and professional interests.
+</p>
 
-Focus: frontend • responsive design • personal branding
+<p>
+<b>Focus:</b><br>
+<code>HTML</code> <code>CSS</code> <code>JavaScript</code>
+<code>Responsive Design</code> <code>UI</code>
+</p>
 
+<p>
 <a href="https://github.com/AyushTodkar404/MY-PERSONAL-PORTFOLIO-WEBSITE">
-<img src="https://img.shields.io/badge/VIEW%20PROJECT-FF2BD6?style=for-the-badge&logo=github&logoColor=white" alt="View project"/>
+<b>🔗 View Repository →</b>
 </a>
+</p>
 
 </td>
-<td width="50%">
+
+<td width="50%" valign="top">
+
+<h3>🔭 Currently Building</h3>
+
+<p>
+Continuously expanding my portfolio through
+practical projects in systems, web development,
+automation and modern software engineering.
+</p>
+
+<p>
+<code>Learn</code> → <code>Build</code> → <code>Improve</code> → <code>Repeat</code>
+</p>
+
+</td>
+
+</tr>
+</table>
+
+</div>
+
+
 
 🔥 More projects coming
 
