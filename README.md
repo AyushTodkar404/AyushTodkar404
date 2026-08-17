@@ -76,6 +76,108 @@ CLOUD & PLATFORMS
 <div align="center">
 
 <!-- DYNAMIC_PROJECTS_START -->
+
+<table>
+
+<tr>
+
+<td width="50%" valign="top">
+
+<h3>🚀 MY-PERSONAL-PORTFOLIO-WEBSITE</h3>
+
+<p>
+My personal developer portfolio website built using HTML and CSS
+</p>
+
+<p>
+<b>Focus:</b><br>
+<code>HTML</code> <code>JavaScript</code>
+</p>
+
+<p>
+⭐ 0
+&nbsp;&nbsp;
+🍴 0
+&nbsp;&nbsp;
+<code>HTML</code>
+</p>
+
+<p>
+<a href="https://github.com/AyushTodkar404/MY-PERSONAL-PORTFOLIO-WEBSITE">
+<b>🔗 View Repository →</b>
+</a>
+</p>
+
+</td>
+
+<td width="50%" valign="top">
+
+<h3>🚀 DEADLOCK-DETECTOR-AND-RECOVERY-SIMULATOR</h3>
+
+<p>
+A project built and maintained as part of my development journey.
+</p>
+
+<p>
+<b>Focus:</b><br>
+<code>JavaScript</code> <code>CSS</code> <code>HTML</code> <code>Jupyter Notebook</code>
+</p>
+
+<p>
+⭐ 0
+&nbsp;&nbsp;
+🍴 0
+&nbsp;&nbsp;
+<code>JavaScript</code>
+</p>
+
+<p>
+<a href="https://github.com/AyushTodkar404/DEADLOCK-DETECTOR-AND-RECOVERY-SIMULATOR">
+<b>🔗 View Repository →</b>
+</a>
+</p>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="50%" valign="top">
+
+<h3>🚀 FIXMYSOT-CIVIC-COMPLAINTS-AND-MAINTAINENCE-TRACKER</h3>
+
+<p>
+A project built and maintained as part of my development journey.
+</p>
+
+<p>
+<b>Focus:</b><br>
+<code>Mixed</code>
+</p>
+
+<p>
+⭐ 0
+&nbsp;&nbsp;
+🍴 0
+&nbsp;&nbsp;
+<code>Mixed</code>
+</p>
+
+<p>
+<a href="https://github.com/AyushTodkar404/FIXMYSOT-CIVIC-COMPLAINTS-AND-MAINTAINENCE-TRACKER">
+<b>🔗 View Repository →</b>
+</a>
+</p>
+
+</td>
+
+<td width="50%" valign="top"></td>
+
+</tr>
+
+</table>
+
 <!-- DYNAMIC_PROJECTS_END -->
 
 </div>
