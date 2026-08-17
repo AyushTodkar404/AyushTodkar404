@@ -73,111 +73,12 @@ CLOUD & PLATFORMS
 
 🚀 FEATURED PROJECTS
 
-## 🚀 FEATURED PROJECTS
-
 <div align="center">
 
-<table>
-<tr>
-
-<td width="50%" valign="top">
-
-<h3>🛡️ Deadlock Detector & Recovery Simulator</h3>
-
-<p>
-An interactive systems project focused on understanding
-Operating System deadlock detection and recovery concepts
-through simulation and visualization.
-</p>
-
-<p>
-<b>Focus:</b><br>
-<code>Algorithms</code> <code>Operating Systems</code>
-<code>Simulation</code> <code>UI</code>
-</p>
-
-<p>
-<a href="https://github.com/AyushTodkar404/DEADLOCK-DETECTOR-AND-RECOVERY-SIMULATOR">
-<b>🔗 View Repository →</b>
-</a>
-</p>
-
-</td>
-
-<td width="50%" valign="top">
-
-<h3>🧾 FixMySpot — Civic Complaints & Maintenance Tracker</h3>
-
-<p>
-A full-stack civic issue management platform connecting
-citizens with municipal authorities for reporting,
-tracking and resolving public issues.
-</p>
-
-<p>
-<b>Focus:</b><br>
-<code>React</code> <code>MongoDB</code> <code>RBAC</code>
-<code>Dashboards</code> <code>Maps</code> <code>Analytics</code>
-</p>
-
-<p>
-<a href="https://github.com/AyushTodkar404/FIXMYSOT-CIVIC-COMPLAINTS-AND-MAINTAINENCE-TRACKER">
-<b>🔗 View Repository →</b>
-</a>
-</p>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td width="50%" valign="top">
-
-<h3>💼 Personal Portfolio Website</h3>
-
-<p>
-A responsive personal developer portfolio showcasing
-projects, technical skills, education, achievements
-and professional interests.
-</p>
-
-<p>
-<b>Focus:</b><br>
-<code>HTML</code> <code>CSS</code> <code>JavaScript</code>
-<code>Responsive Design</code> <code>UI</code>
-</p>
-
-<p>
-<a href="https://github.com/AyushTodkar404/MY-PERSONAL-PORTFOLIO-WEBSITE">
-<b>🔗 View Repository →</b>
-</a>
-</p>
-
-</td>
-
-<td width="50%" valign="top">
-
-<h3>🔭 Currently Building</h3>
-
-<p>
-Continuously expanding my portfolio through
-practical projects in systems, web development,
-automation and modern software engineering.
-</p>
-
-<p>
-<code>Learn</code> → <code>Build</code> → <code>Improve</code> → <code>Repeat</code>
-</p>
-
-</td>
-
-</tr>
-</table>
+<!-- DYNAMIC_PROJECTS_START -->
+<!-- DYNAMIC_PROJECTS_END -->
 
 </div>
-
-
 
 🔥 More projects coming
 
@@ -188,10 +89,6 @@ New experiments, improvements and serious builds will appear here as they are sh
 <a href="https://github.com/AyushTodkar404?tab=repositories">
 <img src="https://img.shields.io/badge/EXPLORE%20ALL%20REPOS-111827?style=for-the-badge&logo=github&logoColor=00F5FF" alt="All repositories"/>
 </a>
-
-</td>
-</tr>
-</table>
 
 📊 GITHUB COMMAND CENTER
 
