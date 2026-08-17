@@ -142,9 +142,9 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 <div align="center">
 
-<img height="180" src="./profile/stats.svg" alt="GitHub statistics"/>
+<img height="240" src="./profile/stats.svg" alt="GitHub statistics"/>
 
-<img height="180" src="./profile/top-langs.svg" alt="Top languages"/>
+<img height="220" src="./profile/top-langs.svg" alt="Top languages"/>
 
 </div>
 
@@ -158,7 +158,7 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 <div align="center">
 
-<img src="https://github-profile-trophy.vercel.app/?username=AyushTodkar404&theme=discord&no-frame=true&no-bg=true&margin-w=8&row=1&column=7" alt="GitHub trophies"/>
+<img src="./profile/achievements.svg" alt="GitHub achievements"/>
 
 </div>
 
@@ -166,7 +166,7 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 <div align="center">
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=AyushTodkar404&bg_color=0D1117&color=00F5FF&line=7C3AED&point=FF2BD6&area_color=7C3AED&area=true&hide_border=true&custom_title=AYUSH%27S%20CONTRIBUTION%20MATRIX" width="95%" alt="Contribution activity graph"/>
+<img src="./profile/activity.svg" width="95%" alt="Contribution activity graph"/>
 
 </div>
 
