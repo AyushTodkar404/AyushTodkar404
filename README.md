@@ -148,11 +148,7 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 </div>
 
-<div align="center">
 
-<img src="https://streak-stats.demolab.com?user=AyushTodkar404&theme=tokyonight&hide_border=true&background=0D1117&ring=00F5FF&fire=FF2BD6&currStreakLabel=00F5FF" alt="GitHub streak"/>
-
-</div>
 
 🏆 TROPHIES
 
