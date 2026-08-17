@@ -2,7 +2,7 @@ name: Build GitHub Profile Dashboard
 
 on:
   schedule:
-    - cron: "25 0 * * *"
+    - cron: "25 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -11,36 +11,52 @@ permissions:
 jobs:
   build-dashboard:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout profile repository
         uses: actions/checkout@v4
 
-      - name: Generate local profile SVGs
+      - name: Generate dynamic projects, achievements and activity
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
         run: |
           python3 <<'PY'
-          import json, os, urllib.request, html
+          import html
+          import json
+          import os
+          import urllib.request
           from pathlib import Path
-          from collections import Counter
-          
+
           token = os.environ["GH_TOKEN"]
           username = os.environ["USERNAME"]
           out = Path("profile")
           out.mkdir(exist_ok=True)
-          
+
           query = """
           query($login:String!) {
             user(login:$login) {
               login
               followers { totalCount }
-              repositories(first:100, ownerAffiliations:OWNER, privacy:PUBLIC, orderBy:{field:UPDATED_AT,direction:DESC}) {
+              repositories(
+                first: 100
+                ownerAffiliations: OWNER
+                privacy: PUBLIC
+                orderBy: {field: UPDATED_AT, direction: DESC}
+              ) {
                 totalCount
                 nodes {
+                  name
+                  description
+                  url
+                  pushedAt
+                  updatedAt
+                  isFork
+                  isArchived
                   stargazerCount
                   forkCount
-                  languages(first:10, orderBy:{field:SIZE,direction:DESC}) {
+                  primaryLanguage { name }
+                  languages(first: 6, orderBy: {field: SIZE, direction: DESC}) {
                     edges { size node { name } }
                   }
                 }
@@ -52,15 +68,24 @@ jobs:
                 totalPullRequestReviewContributions
                 contributionCalendar {
                   totalContributions
-                  weeks { contributionDays { date contributionCount } }
+                  weeks {
+                    contributionDays {
+                      date
+                      contributionCount
+                    }
+                  }
                 }
               }
             }
           }
           """
-          
-          body = json.dumps({"query": query, "variables": {"login": username}}).encode()
-          req = urllib.request.Request(
+
+          body = json.dumps({
+              "query": query,
+              "variables": {"login": username}
+          }).encode()
+
+          request = urllib.request.Request(
               "https://api.github.com/graphql",
               data=body,
               headers={
@@ -71,97 +96,56 @@ jobs:
               },
               method="POST"
           )
-          
-          with urllib.request.urlopen(req) as response:
+
+          with urllib.request.urlopen(request) as response:
               payload = json.load(response)
-          
+
           if payload.get("errors"):
               raise RuntimeError(payload["errors"])
-          
-          u = payload["data"]["user"]
-          repos = u["repositories"]["nodes"]
-          cc = u["contributionsCollection"]
-          cal = cc["contributionCalendar"]
-          
-          public_repos = u["repositories"]["totalCount"]
-          followers = u["followers"]["totalCount"]
-          stars = sum(r["stargazerCount"] for r in repos)
-          
-          langs = Counter()
-          for repo in repos:
-              for edge in repo["languages"]["edges"]:
-                  langs[edge["node"]["name"]] += edge["size"]
-          top_langs = langs.most_common(6)
-          lang_total = sum(v for _, v in top_langs) or 1
-          
+
+          user = payload["data"]["user"]
+          repos = user["repositories"]["nodes"]
+          contributions = user["contributionsCollection"]
+          calendar = contributions["contributionCalendar"]
+
+          public_repos = user["repositories"]["totalCount"]
+          followers = user["followers"]["totalCount"]
+          stars = sum(repo["stargazerCount"] for repo in repos)
+
           days = []
-          for week in cal["weeks"]:
+          for week in calendar["weeks"]:
               days.extend(week["contributionDays"])
-          days.sort(key=lambda d: d["date"])
-          
+          days.sort(key=lambda item: item["date"])
+
           streak = 0
-          for d in reversed(days):
-              if d["contributionCount"] > 0:
+          for day in reversed(days):
+              if day["contributionCount"] > 0:
                   streak += 1
               elif streak:
                   break
-          
-          total_contrib = cal["totalContributions"]
-          commits = cc["totalCommitContributions"]
-          issues = cc["totalIssueContributions"]
-          prs = cc["totalPullRequestContributions"]
-          reviews = cc["totalPullRequestReviewContributions"]
-          
+
+          total_contrib = calendar["totalContributions"]
+          commits = contributions["totalCommitContributions"]
+          issues = contributions["totalIssueContributions"]
+          prs = contributions["totalPullRequestContributions"]
+          reviews = contributions["totalPullRequestReviewContributions"]
+
           def esc(value):
-              return html.escape(str(value))
-          
+              return html.escape(str(value or ""), quote=True)
+
           def shell(width, height, body):
               return (
-                  '<svg xmlns="http://www.w3.org/2000/svg" width="' + str(width) +
-                  '" height="' + str(height) + '" viewBox="0 0 ' +
-                  str(width) + ' ' + str(height) + '">' +
-                  '<rect width="100%" height="100%" rx="18" fill="#0D1117"/>' +
-                  '<rect x="1" y="1" width="' + str(width-2) +
-                  '" height="' + str(height-2) +
-                  '" rx="17" fill="none" stroke="#30363D"/>' +
-                  body + '</svg>'
+                  f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" '
+                  f'height="{height}" viewBox="0 0 {width} {height}">'
+                  '<rect width="100%" height="100%" rx="18" fill="#0D1117"/>'
+                  f'<rect x="1" y="1" width="{width-2}" height="{height-2}" '
+                  f'rx="17" fill="none" stroke="#30363D"/>'
+                  f'{body}</svg>'
               )
-          
-          stats = """
-          <text x="28" y="38" fill="#00F5FF" font-size="18" font-family="Arial" font-weight="700">GITHUB COMMAND CENTER</text>
-          <text x="28" y="68" fill="#8B949E" font-size="14" font-family="Arial">@""" + esc(username) + """</text>
-          """
-          stat_items = [
-              ("CONTRIBUTIONS", f"{total_contrib:,}"),
-              ("COMMITS", f"{commits:,}"),
-              ("REPOSITORIES", f"{public_repos:,}"),
-              ("STARS", f"{stars:,}"),
-              ("FOLLOWERS", f"{followers:,}"),
-              ("CURRENT STREAK", f"{streak}d"),
-          ]
-          positions = [(28,112),(190,112),(352,112),(28,182),(190,182),(352,182)]
-          for (label, value), (x, y) in zip(stat_items, positions):
-              value_color = "#00F5FF" if label == "CURRENT STREAK" else "#E6EDF3"
-              stats += (
-                  f'<text x="{x}" y="{y}" fill="#8B949E" font-size="12" font-family="Arial">{label}</text>'
-                  f'<text x="{x}" y="{y+28}" fill="{value_color}" font-size="25" font-family="Arial" font-weight="700">{value}</text>'
-              )
-          (out / "stats.svg").write_text(shell(520, 240, stats), encoding="utf-8")
-          
-          lang_body = '<text x="28" y="30" fill="#00F5FF" font-size="17" font-family="Arial" font-weight="700">TOP LANGUAGES</text>'
-          y = 52
-          for name, value in top_langs:
-              pct = value / lang_total * 100
-              bar = 427 * pct / 100
-              lang_body += (
-                  f'<text x="28" y="{y}" fill="#E6EDF3" font-size="13" font-family="Arial">{esc(name)}</text>'
-                  f'<text x="455" y="{y}" text-anchor="end" fill="#8B949E" font-size="12" font-family="Arial">{pct:.1f}%</text>'
-                  f'<rect x="28" y="{y+10}" width="427" height="7" rx="4" fill="#21262D"/>'
-                  f'<rect x="28" y="{y+10}" width="{bar:.1f}" height="7" rx="4" fill="#00F5FF"/>'
-              )
-              y += 45
-          (out / "top-langs.svg").write_text(shell(500, max(100, y+5), lang_body), encoding="utf-8")
-          
+
+          # ---------------------------------------------------------
+          # ACHIEVEMENTS — same visual treatment as the current README
+          # ---------------------------------------------------------
           achievements = [
               ("CONTRIBUTOR", total_contrib >= 1, f"{total_contrib:,} contributions"),
               ("BUILDER", public_repos >= 5, f"{public_repos} public repos"),
@@ -170,50 +154,226 @@ jobs:
               ("COMMITTER", commits >= 50, f"{commits} commits"),
               ("STREAK", streak >= 7, f"{streak} day streak"),
           ]
-          trophy = '<text x="22" y="30" fill="#00F5FF" font-size="17" font-family="Arial" font-weight="700">ACHIEVEMENTS</text>'
-          for i, (label, unlocked, detail) in enumerate(achievements):
-              x = 22 + (i % 3) * 164
-              y0 = 55 + (i // 3) * 92
+
+          trophy = (
+              '<text x="22" y="30" fill="#00F5FF" font-size="17" '
+              'font-family="Arial" font-weight="700">ACHIEVEMENTS</text>'
+          )
+
+          for index, (label, unlocked, detail) in enumerate(achievements):
+              x = 22 + (index % 3) * 164
+              y = 55 + (index // 3) * 92
               stroke = "#FF2BD6" if unlocked else "#30363D"
               icon = "★" if unlocked else "○"
               trophy += (
-                  f'<rect x="{x}" y="{y0}" width="145" height="72" rx="12" fill="#11161D" stroke="{stroke}"/>'
-                  f'<text x="{x+16}" y="{y0+25}" fill="{stroke}" font-size="18" font-family="Arial">{icon}</text>'
-                  f'<text x="{x+42}" y="{y0+24}" fill="#E6EDF3" font-size="11" font-family="Arial" font-weight="700">{esc(label)}</text>'
-                  f'<text x="{x+16}" y="{y0+48}" fill="#8B949E" font-size="10" font-family="Arial">{esc(detail)}</text>'
+                  f'<rect x="{x}" y="{y}" width="145" height="72" rx="12" '
+                  f'fill="#11161D" stroke="{stroke}"/>'
+                  f'<text x="{x+16}" y="{y+25}" fill="{stroke}" font-size="18" '
+                  f'font-family="Arial">{icon}</text>'
+                  f'<text x="{x+42}" y="{y+24}" fill="#E6EDF3" font-size="11" '
+                  f'font-family="Arial" font-weight="700">{esc(label)}</text>'
+                  f'<text x="{x+16}" y="{y+48}" fill="#8B949E" font-size="10" '
+                  f'font-family="Arial">{esc(detail)}</text>'
               )
-          (out / "achievements.svg").write_text(shell(520, 250, trophy), encoding="utf-8")
-          
+
+          (out / "achievements.svg").write_text(
+              shell(520, 250, trophy), encoding="utf-8"
+          )
+
+          # ---------------------------------------------------------
+          # ACTIVITY — same visual treatment as the current dashboard
+          # ---------------------------------------------------------
           recent = days[-90:] if len(days) > 90 else days
           width, height = 760, 260
           left, right, top, bottom = 42, 20, 58, 38
           plot_w = width - left - right
           plot_h = height - top - bottom
-          maxv = max([d["contributionCount"] for d in recent] + [1])
+          max_value = max([d["contributionCount"] for d in recent] + [1])
+
           points = []
           circles = []
-          for i, d in enumerate(recent):
-              x = left + i * plot_w / max(1, len(recent)-1)
-              yv = top + plot_h - (d["contributionCount"] / maxv) * plot_h
-              points.append(f"{x:.1f},{yv:.1f}")
-              if d["contributionCount"]:
-                  circles.append(f'<circle cx="{x:.1f}" cy="{yv:.1f}" r="2.2" fill="#FF2BD6"/>')
+
+          for index, day in enumerate(recent):
+              x = left + index * plot_w / max(1, len(recent) - 1)
+              y = top + plot_h - (
+                  day["contributionCount"] / max_value
+              ) * plot_h
+              points.append(f"{x:.1f},{y:.1f}")
+              if day["contributionCount"]:
+                  circles.append(
+                      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.2" fill="#FF2BD6"/>'
+                  )
+
           activity = (
-              f'<text x="24" y="31" fill="#00F5FF" font-size="17" font-family="Arial" font-weight="700">CONTRIBUTION ACTIVITY · LAST {len(recent)} DAYS</text>'
-              f'<line x1="{left}" y1="{top+plot_h}" x2="{width-right}" y2="{top+plot_h}" stroke="#30363D"/>'
-              f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top+plot_h}" stroke="#30363D"/>'
-              f'<polyline points="{" ".join(points)}" fill="none" stroke="#7C3AED" stroke-width="3"/>'
-              + "".join(circles) +
-              f'<text x="{left}" y="{height-12}" fill="#8B949E" font-size="10" font-family="Arial">Older</text>'
-              f'<text x="{width-right}" y="{height-12}" text-anchor="end" fill="#8B949E" font-size="10" font-family="Arial">Recent</text>'
+              f'<text x="24" y="31" fill="#00F5FF" font-size="17" '
+              f'font-family="Arial" font-weight="700">CONTRIBUTION ACTIVITY · LAST {len(recent)} DAYS</text>'
+              f'<line x1="{left}" y1="{top+plot_h}" x2="{width-right}" '
+              f'y2="{top+plot_h}" stroke="#30363D"/>'
+              f'<line x1="{left}" y1="{top}" x2="{left}" '
+              f'y2="{top+plot_h}" stroke="#30363D"/>'
+              f'<polyline points="{" ".join(points)}" fill="none" '
+              f'stroke="#7C3AED" stroke-width="3"/>'
+              + "".join(circles)
+              + f'<text x="{left}" y="{height-12}" fill="#8B949E" '
+              f'font-size="10" font-family="Arial">Older</text>'
+              + f'<text x="{width-right}" y="{height-12}" text-anchor="end" '
+              f'fill="#8B949E" font-size="10" font-family="Arial">Recent</text>'
           )
-          (out / "activity.svg").write_text(shell(width, height, activity), encoding="utf-8")
+
+          (out / "activity.svg").write_text(
+              shell(width, height, activity), encoding="utf-8"
+          )
+
+          # ---------------------------------------------------------
+          # PROJECTS — same 2-column card/table structure as the
+          # user's existing README, but generated from live repos.
+          # ---------------------------------------------------------
+          projects = [
+              repo for repo in repos
+              if not repo["isFork"]
+              and not repo["isArchived"]
+              and repo["name"].lower() != username.lower()
+          ]
+
+          projects.sort(
+              key=lambda repo: (
+                  repo["pushedAt"] or repo["updatedAt"] or ""
+              ),
+              reverse=True
+          )
+
+          # Show the 8 most recently active public repositories.
+          projects = projects[:8]
+
+          cards = []
+
+          for repo in projects:
+              name = esc(repo["name"])
+              description = esc(
+                  repo["description"] or
+                  "A project built and maintained as part of my development journey."
+              )
+              url = esc(repo["url"])
+              language = esc(
+                  (repo["primaryLanguage"] or {}).get("name", "Mixed")
+              )
+
+              language_tags = [
+                  edge["node"]["name"]
+                  for edge in repo["languages"]["edges"]
+              ]
+              language_tags = language_tags[:4]
+
+              if not language_tags:
+                  language_tags = [language]
+
+              tags = " ".join(
+                  f"<code>{esc(tag)}</code>" for tag in language_tags
+              )
+
+              card = f"""
+          <td width="50%" valign="top">
+
+          <h3>🚀 {name}</h3>
+
+          <p>
+          {description}
+          </p>
+
+          <p>
+          <b>Focus:</b><br>
+          {tags}
+          </p>
+
+          <p>
+          ⭐ {repo["stargazerCount"]}
+          &nbsp;&nbsp;
+          🍴 {repo["forkCount"]}
+          &nbsp;&nbsp;
+          <code>{language}</code>
+          </p>
+
+          <p>
+          <a href="{url}">
+          <b>🔗 View Repository →</b>
+          </a>
+          </p>
+
+          </td>
+          """
+              cards.append(card.strip())
+
+          rows = []
+
+          for index in range(0, len(cards), 2):
+              row = cards[index:index + 2]
+
+              if len(row) == 1:
+                  row.append(
+                      '<td width="50%" valign="top"></td>'
+                  )
+
+              rows.append(
+                  "<tr>\n\n"
+                  + "\n\n".join(row)
+                  + "\n\n</tr>"
+              )
+
+          if rows:
+              project_html = (
+                  "<table>\n\n"
+                  + "\n\n".join(rows)
+                  + "\n\n</table>"
+              )
+          else:
+              project_html = (
+                  "<p>No public projects found yet.</p>"
+              )
+
+          readme_path = Path("README.md")
+          readme = readme_path.read_text(encoding="utf-8")
+
+          start_marker = "<!-- DYNAMIC_PROJECTS_START -->"
+          end_marker = "<!-- DYNAMIC_PROJECTS_END -->"
+
+          if start_marker not in readme or end_marker not in readme:
+              raise RuntimeError(
+                  "README.md is missing the dynamic project markers."
+              )
+
+          before = readme.split(start_marker, 1)[0]
+          after = readme.split(end_marker, 1)[1]
+
+          readme = (
+              before
+              + start_marker
+              + "\n\n"
+              + project_html
+              + "\n\n"
+              + end_marker
+              + after
+          )
+
+          readme_path.write_text(readme, encoding="utf-8")
+
+          print("Dynamic profile update complete.")
+          print(f"Repositories discovered: {len(projects)}")
+          print(f"Total contributions: {total_contrib}")
+          print(f"Current streak: {streak} days")
+          print(f"Public repositories: {public_repos}")
+          print(f"Stars: {stars}")
+          print(f"Followers: {followers}")
+          print(f"Commits: {commits}")
+          print(f"Issues: {issues}")
+          print(f"Pull requests: {prs}")
+          print(f"Reviews: {reviews}")
           PY
-          
-      - name: Commit dashboard SVGs
+
+      - name: Commit dashboard and dynamic projects
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/*.svg
-          git commit -m "Update local GitHub profile dashboard" || exit 0
+          git add README.md profile/achievements.svg profile/activity.svg
+          git diff --cached --quiet && exit 0
+          git commit -m "Auto-update GitHub profile dashboard"
           git push
