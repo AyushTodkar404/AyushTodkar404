@@ -1,5 +1,3 @@
-## Hi there 👋
-
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,50:7C3AED,100:FF2BD6&height=220&section=header&text=AYUSH%20TODKAR&fontSize=58&fontColor=ffffff&fontAlignY=35&desc=COMPUTER%20ENGINEERING%20%7C%20DEVELOPER%20%7C%20BUILDER&descAlignY=58&descSize=17" width="100%" alt="Animated neon header"/>
@@ -22,11 +20,8 @@
 
 </div>
 
----
+⚡ SYSTEM STATUS
 
-## ⚡ SYSTEM STATUS
-
-```text
 ╭────────────────────────────────────────────────────────────────────╮
 │  AYUSH TODKAR // DEVELOPER PROFILE                               │
 ├────────────────────────────────────────────────────────────────────┤
@@ -35,59 +30,60 @@
 │  CURRENTLY     Exploring Web Development + Cloud + Systems       │
 │  MINDSET       Curiosity > Comfort                               │
 ╰────────────────────────────────────────────────────────────────────╯
-```
 
 <div align="center">
 
-### `I don't just collect technologies. I build with them.`
+I don't just collect technologies. I build with them.
 
 </div>
 
----
+🧠 ABOUT THE DEVELOPER
 
-## 🧠 ABOUT THE DEVELOPER
+I'm a Computer Engineering student and developer interested in building practical software and understanding how things work underneath the interface.
 
-I'm a **Computer Engineering student and developer** interested in building practical software and understanding how things work underneath the interface.
+🔭 Building and refining real-world projects
 
-- 🔭 Building and refining real-world projects
-- 🌐 Exploring **Web Development**
-- ☁️ Exploring **Cloud Computing & Azure**
-- 🧩 Interested in **Systems, Operating Systems & problem solving**
-- 🛠️ Learning through implementation rather than tutorials alone
-- 🎯 Long-term goal: become a versatile software engineer
+🌐 Exploring Web Development
 
----
+☁️ Exploring Cloud Computing & Azure
 
-## 🛸 TECH ARSENAL
+🧩 Interested in Systems, Operating Systems & problem solving
+
+🛠️ Learning through implementation rather than tutorials alone
+
+🎯 Long-term goal: become a versatile software engineer
+
+🛸 TECH ARSENAL
 
 <div align="center">
 
-### LANGUAGES
+LANGUAGES
+
 <img src="https://skillicons.dev/icons?i=c,cpp,java,python,javascript,html,css" alt="Programming languages"/>
 
-### DEVELOPMENT
+DEVELOPMENT
+
 <img src="https://skillicons.dev/icons?i=nodejs,react,git,github,vscode,linux" alt="Development tools"/>
 
-### CLOUD & PLATFORMS
+CLOUD & PLATFORMS
+
 <img src="https://skillicons.dev/icons?i=azure" alt="Cloud"/>
 
 </div>
 
----
-
-## 🚀 FEATURED PROJECTS
+🚀 FEATURED PROJECTS
 
 <table>
 <tr>
 <td width="50%">
 
-### 🛡️ Deadlock Detector & Recovery Simulator
+🛡️ Deadlock Detector & Recovery Simulator
 
-**Systems / Operating Systems**
+Systems / Operating Systems
 
 A practical simulator focused on visualizing deadlock detection and recovery concepts.
 
-**Focus:** algorithms • OS concepts • simulation • UI
+Focus: algorithms • OS concepts • simulation • UI
 
 <a href="https://github.com/AyushTodkar404/DEADLOCK-DETECTOR-AND-RECOVERY-SIMULATOR">
 <img src="https://img.shields.io/badge/VIEW%20PROJECT-00F5FF?style=for-the-badge&logo=github&logoColor=black" alt="View project"/>
@@ -96,13 +92,13 @@ A practical simulator focused on visualizing deadlock detection and recovery con
 </td>
 <td width="50%">
 
-### 🧾 Civic Complaints & Maintenance Tracker
+🧾 Civic Complaints & Maintenance Tracker
 
-**Web Application**
+Web Application
 
 A structured platform for organizing civic complaints and maintenance-related records.
 
-**Focus:** web development • data handling • usability
+Focus: web development • data handling • usability
 
 <a href="https://github.com/AyushTodkar404/FIXMYSOT-CIVIC-COMPLAINTS-AND-MAINTENANCE-TRACKER">
 <img src="https://img.shields.io/badge/VIEW%20PROJECT-7C3AED?style=for-the-badge&logo=github&logoColor=white" alt="View project"/>
@@ -113,13 +109,13 @@ A structured platform for organizing civic complaints and maintenance-related re
 <tr>
 <td width="50%">
 
-### 💼 Personal Portfolio Website
+💼 Personal Portfolio Website
 
-**Portfolio / Frontend**
+Portfolio / Frontend
 
 A personal developer portfolio designed to present projects, skills and progress.
 
-**Focus:** frontend • responsive design • personal branding
+Focus: frontend • responsive design • personal branding
 
 <a href="https://github.com/AyushTodkar404/MY-PERSONAL-PORTFOLIO-WEBSITE">
 <img src="https://img.shields.io/badge/VIEW%20PROJECT-FF2BD6?style=for-the-badge&logo=github&logoColor=white" alt="View project"/>
@@ -128,9 +124,9 @@ A personal developer portfolio designed to present projects, skills and progress
 </td>
 <td width="50%">
 
-### 🔥 More projects coming
+🔥 More projects coming
 
-This profile is intentionally built as a **living portfolio**.
+This profile is intentionally built as a living portfolio.
 
 New experiments, improvements and serious builds will appear here as they are shipped.
 
@@ -142,15 +138,13 @@ New experiments, improvements and serious builds will appear here as they are sh
 </tr>
 </table>
 
----
-
-## 📊 GITHUB COMMAND CENTER
+📊 GITHUB COMMAND CENTER
 
 <div align="center">
 
-<img height="180" src="https://github-readme-stats.vercel.app/api?username=AyushTodkar404&show_icons=true&hide_border=true&theme=tokyonight&bg_color=0D1117&title_color=00F5FF&icon_color=FF2BD6&text_color=E6EDF3&ring_color=7C3AED&include_all_commits=true" alt="GitHub statistics"/>
+<img height="180" src="./profile/stats.svg" alt="GitHub statistics"/>
 
-<img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyushTodkar404&layout=compact&hide_border=true&theme=tokyonight&bg_color=0D1117&title_color=00F5FF&text_color=E6EDF3&langs_count=8" alt="Top languages"/>
+<img height="180" src="./profile/top-langs.svg" alt="Top languages"/>
 
 </div>
 
@@ -160,9 +154,7 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 </div>
 
----
-
-## 🏆 TROPHIES
+🏆 TROPHIES
 
 <div align="center">
 
@@ -170,9 +162,7 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 </div>
 
----
-
-## 📈 CONTRIBUTION ACTIVITY
+📈 CONTRIBUTION ACTIVITY
 
 <div align="center">
 
@@ -180,19 +170,19 @@ New experiments, improvements and serious builds will appear here as they are sh
 
 </div>
 
----
-
-## 🐍 CONTRIBUTION MATRIX
+🐍 CONTRIBUTION MATRIX
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/AyushTodkar404/AyushTodkar404/output/github-contribution-grid-snake.svg" alt="Animated contribution snake" width="95%"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AyushTodkar404/AyushTodkar404/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AyushTodkar404/AyushTodkar404/output/github-contribution-grid-snake.svg">
+  <img src="https://raw.githubusercontent.com/AyushTodkar404/AyushTodkar404/output/github-contribution-grid-snake.svg" alt="Animated contribution snake" width="95%">
+</picture>
 
 </div>
 
----
-
-## 🎯 CURRENT OPERATING MODE
+🎯 CURRENT OPERATING MODE
 
 <table align="center">
 <tr>
@@ -204,17 +194,13 @@ New experiments, improvements and serious builds will appear here as they are sh
 </tr>
 </table>
 
----
+📡 DEVELOPER PHILOSOPHY
 
-## 📡 DEVELOPER PHILOSOPHY
+Learn deeply. Build visibly. Document clearly. Improve relentlessly.
 
-> **Learn deeply. Build visibly. Document clearly. Improve relentlessly.**
+I want my GitHub to tell a story: not just what I know, but what I have built, what I'm learning and how I'm improving.
 
-I want my GitHub to tell a story: not just *what I know*, but **what I have built, what I'm learning and how I'm improving.**
-
----
-
-## 🌐 CONNECT
+🌐 CONNECT
 
 <div align="center">
 
@@ -227,15 +213,8 @@ I want my GitHub to tell a story: not just *what I know*, but **what I have buil
 
 </div>
 
-> Replace the LinkedIn placeholder above with your actual profile URL when you're ready.
-
----
-
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF2BD6,50:7C3AED,100:00F5FF&height=120&section=footer" width="100%" alt="Animated neon footer"/>
 
-**`BUILD // BREAK // LEARN // REBUILD`**
-
-</div>
-
+BUILD // BREAK // LEARN // REBUILD
