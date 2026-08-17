@@ -228,22 +228,23 @@ jobs:
           # PROJECTS — same 2-column card/table structure as the
           # user's existing README, but generated from live repos.
           # ---------------------------------------------------------
+
           projects = [
-              repo for repo in repos
-              if not repo["isFork"]
-              and not repo["isArchived"]
-              and repo["name"].lower() != username.lower()
+           repo for repo in repos
+           if not repo["isFork"]
+           and not repo["isArchived"]
+          and repo["name"].lower() != username.lower()
           ]
 
           projects.sort(
-              key=lambda repo: (
-                  repo["pushedAt"] or repo["updatedAt"] or ""
-              ),
-              reverse=True
-          )
+           key=lambda repo: (
+           repo["pushedAt"] or repo["updatedAt"] or ""
+          ),
+           reverse=True
+         )
 
-          # Show the 8 most recently active public repositories.
-          projects = projects[:8]
+# ALL eligible public repositories are displayed.
+
 
           cards = []
 
